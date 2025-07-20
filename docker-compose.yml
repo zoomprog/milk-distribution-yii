@@ -1,9 +1,35 @@
-version: '2'
+version: '3.8'
+
 services:
-  php:
-    image: yiisoftware/yii2-php:7.4-apache
+  app:
+    image: yiisoftware/yii2-php:8.2-apache
+    container_name: yii2_app
     volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./:/app:delegated
+      - ./:/app
     ports:
-      - '8000:80'
+      - "8080:80"
+    environment:
+      - YII_ENV=dev
+      - YII_DEBUG=1
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: yii2_db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

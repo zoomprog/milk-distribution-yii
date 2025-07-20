@@ -5,20 +5,23 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%cistern}}`.
  */
-class m250720_173540_create_cistern_table extends Migration
+class m250720_180923_create_cistern_table extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
     public function safeUp()
     {
         $this->createTable('{{%cistern}}', [
             'id' => $this->primaryKey(),
-            'cistern_number' => $this->string()->notNull()->unique(),
+            'cistern_number' => $this->integer()->notNull()->unique(),
             'current_amount' => $this->integer()->notNull()->defaultValue(0),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
         ]);
+
+        // Заполнить 5 цистерн
+        for ($i = 1; $i <= 5; $i++) {
+            $this->insert('{{%cistern}}', [
+                'cistern_number' => $i,
+                'current_amount' => 0,
+            ]);
+        }
     }
 
     public function safeDown()
