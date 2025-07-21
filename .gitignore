@@ -1,33 +1,45 @@
-# phpstorm project files
-.idea
-
-# netbeans project files
-nbproject
-
-# zend studio for eclipse project files
+# IDE и системные файлы
+.idea/
+nbproject/
 .buildpath
 .project
-.settings
-
-# windows thumbnail cache
+.settings/
 Thumbs.db
-
-# composer vendor dir
-/vendor
-
-# composer itself is not needed
-composer.phar
-
-# Mac DS_Store Files
 .DS_Store
 
-# phpunit itself is not needed
+# Composer
+/vendor/
+composer.phar
+# Если не хотите фиксировать зависимости, раскомментируйте следующую строку
+# composer.lock
+
+# PHPUnit
 phpunit.phar
-# local phpunit config
 /phpunit.xml
 
-tests/_output/*
-tests/_support/_generated
+# Тестовые артефакты
+/tests/_output/
+/tests/_support/_generated/
 
-#vagrant folder
-/.vagrant
+# Vagrant
+/.vagrant/
+
+# Кэш и логи
+/runtime/
+/web/assets/
+/web/css/*.map
+*.log
+
+# Docker
+.env
+.docker/
+docker-compose.override.yml
+
+# Файлы окружения
+.env.*
+
+# Другие временные файлы
+*.swp
+*.swo
+*.bak
+*.tmp
